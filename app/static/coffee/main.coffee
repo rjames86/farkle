@@ -105,7 +105,7 @@ DiceView = React.createClass
       d.p {}, "Total Score: #{@state.totalScore}"
       d.div {className: "row"},
         for index, items of @state.dice
-          d.div { className: "col-xs-1"},
+          d.div { className: "col-md-1 col-xs-3"},
             d.img {src: "/static/images/#{items.value}.png", "data-number": "#{index}", id: "die#{items.id}"}
       d.div {className: "btn-group btn-group-justified", role:"group"},
           d.div { className: "btn-group", role:"group"},

@@ -146,7 +146,7 @@
         for (index in _ref) {
           items = _ref[index];
           _results.push(d.div({
-            className: "col-xs-1"
+            className: "col-md-1 col-xs-3"
           }, d.img({
             src: "/static/images/" + items.value + ".png",
             "data-number": "" + index,
