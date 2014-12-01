@@ -126,7 +126,7 @@ class Game
         score = 200
         continue
       if count == 3
-        score += diceNum * 100
+        score += if diceNum != 1 then diceNum * 100 else 300
       if count == 4
         score += 1000
       if count == 5

@@ -59,7 +59,8 @@
         items = _ref[index];
         if (items.state === 1) {
           console.log("setting to -1");
-          _results.push(this.setDiceState(index, -1));
+          this.setDiceState(index, -1);
+          _results.push($("#die" + items.id).off("click", this.imageClick));
         } else {
           _results.push(void 0);
         }
@@ -137,7 +138,7 @@
     },
     render: function() {
       var index, items;
-      return d.div({}, d.p({}, "Hello there"), d.p({}, "Round Score: " + this.state.roundScore), d.p({}, "This Round: " + this.state.rollScore), d.p({}, "Total Score: " + this.state.totalScore), d.div({
+      return d.div({}, d.p({}, "Hello there"), d.p({}, "Round Score: " + this.state.roundScore), d.p({}, "This Roll: " + this.state.rollScore), d.p({}, "Total Score: " + this.state.totalScore), d.div({
         className: "row"
       }, (function() {
         var _ref, _results;

@@ -215,7 +215,7 @@
           continue;
         }
         if (count === 3) {
-          score += diceNum * 100;
+          score += diceNum !== 1 ? diceNum * 100 : 300;
         }
         if (count === 4) {
           score += 1000;

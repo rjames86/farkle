@@ -42,6 +42,7 @@ DiceView = React.createClass
       if items.state == 1
         console.log "setting to -1"
         @setDiceState(index, -1)
+        $("#die#{items.id}").off "click", @imageClick
 
   resetDice: () ->
     for index, items of @state.dice
@@ -73,7 +74,6 @@ DiceView = React.createClass
     @setState roundScore: currentRoundScore + @props.player.getTempScore()
 
     @setState rollScore: @props.player.setTempScore(0)
-
     @setState dice: @props.game.rollDice()
     @selectDice()
 
@@ -101,7 +101,7 @@ DiceView = React.createClass
     d.div {},
       d.p {}, "Hello there"
       d.p {}, "Round Score: #{@state.roundScore}"
-      d.p {}, "This Round: #{@state.rollScore}"
+      d.p {}, "This Roll: #{@state.rollScore}"
       d.p {}, "Total Score: #{@state.totalScore}"
       d.div {className: "row"},
         for index, items of @state.dice
