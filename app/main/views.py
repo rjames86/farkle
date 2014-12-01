@@ -5,5 +5,5 @@ from . import main
 def index():
   return render_template(
     'index.html',
-    coffeescripts=['datastores', 'player', 'game', 'main']
+    coffeescripts=['player', 'game', 'main']
   )
