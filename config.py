@@ -42,8 +42,8 @@ class HerokuConfig(ProductionConfig):
         ProductionConfig.init_app(app)
 
         #log to stderr
-        import loggin
-        from loggin import StreamHandler
+        import logging
+        from logging import StreamHandler
         file_handler = StreamHandler()
         file_handler.setLevel(logging.WARNING)
         app.logger.addHandler(file_handler)
@@ -56,6 +56,8 @@ config = {
     'production': ProductionConfig,
 
     'default': DevelopmentConfig
+
+    'heroku': HerokuConfig
 }
 
 
