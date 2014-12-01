@@ -17,6 +17,7 @@ DiceView = React.createClass
       roundScore: 0
       selectedDice: []
       canSelect: false
+      farkled: false
     }
 
   selectDice: (override = false) ->
@@ -33,6 +34,7 @@ DiceView = React.createClass
     @setState
       rollScore: @props.player.setTempScore(0)
       roundScore: 0
+      farkled: true
     @resetDice()
     @selectDice(true)
     @setState canSelect: false
@@ -69,6 +71,8 @@ DiceView = React.createClass
 
 
   updateDice: () ->
+    @setState
+      farkled: false
     @checkCalculated()
     currentRoundScore = @state.roundScore
     @setState roundScore: currentRoundScore + @props.player.getTempScore()
@@ -107,6 +111,8 @@ DiceView = React.createClass
         for index, items of @state.dice
           d.div { className: "col-md-1 col-xs-3"},
             d.img {src: "/static/images/#{items.value}.png", "data-number": "#{index}", id: "die#{items.id}"}
+      if @state.farkled
+        d.h2 {}, "Farkled!!"
       d.div {className: "btn-group btn-group-justified", role:"group"},
           d.div { className: "btn-group", role:"group"},
             d.button {type:"button", className: "btn btn-default", onClick: @updateDice}, "Roll"

@@ -21,7 +21,8 @@
         totalScore: 0,
         roundScore: 0,
         selectedDice: [],
-        canSelect: false
+        canSelect: false,
+        farkled: false
       };
     },
     selectDice: function(override) {
@@ -43,7 +44,8 @@
     farkled: function() {
       this.setState({
         rollScore: this.props.player.setTempScore(0),
-        roundScore: 0
+        roundScore: 0,
+        farkled: true
       });
       this.resetDice();
       this.selectDice(true);
@@ -102,6 +104,9 @@
     },
     updateDice: function() {
       var currentRoundScore;
+      this.setState({
+        farkled: false
+      });
       this.checkCalculated();
       currentRoundScore = this.state.roundScore;
       this.setState({
@@ -155,7 +160,7 @@
           })));
         }
         return _results;
-      }).call(this)), d.div({
+      }).call(this)), this.state.farkled ? d.h2({}, "Farkled!!") : void 0, d.div({
         className: "btn-group btn-group-justified",
         role: "group"
       }, d.div({
