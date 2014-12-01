@@ -1,0 +1,25 @@
+{% extends "bootstrap/base.html" %}
+
+{% block head %}
+{{ super() }}
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://www.dropbox.com/static/api/dropbox-datastores-1.2-latest.js"></script>
+  <script src="{{ url_for('static', filename='javascript/libs/react.js') }}"></script>
+  <style type="text/css">
+    .faded {
+      opacity: 0.5;
+    }
+    .more-faded {
+  opacity: 0.15;
+}
+  </style>
+{% endblock %}
+
+
+{% block content %}
+  <div id="container"></div>
+  {% for coffee in coffeescripts %}
+    <script src="{{ url_for('static', filename='javascript/' + coffee + '.js') }}"></script>
+  {%endfor%}
+
+{% endblock %}
