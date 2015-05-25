@@ -1,5 +1,24 @@
 d = React.DOM
 
+Width = React.createClass
+  getInitialState: () ->
+    width: window.innerWidth
+
+  handleResize: (e) ->
+    @setState width: window.innerWidth
+
+  handleClick: (e) ->
+    console.log "clicky clicky"
+
+  componentDidMount: () ->
+    window.addEventListener "resize", @handleResize
+    window.addEventListener "click", @handleClick
+
+  render: () ->
+    d.p {}, @state.width
+
+
+
 DiceView = React.createClass
   getInitialState: () ->
     dice = []
@@ -71,14 +90,13 @@ DiceView = React.createClass
 
 
   updateDice: () ->
-    @setState
-      farkled: false
     @checkCalculated()
     currentRoundScore = @state.roundScore
-    @setState roundScore: currentRoundScore + @props.player.getTempScore()
-
-    @setState rollScore: @props.player.setTempScore(0)
-    @setState dice: @props.game.rollDice()
+    @setState
+      farkled: false
+      roundScore: currentRoundScore + @props.player.getTempScore()
+      rollScore: @props.player.setTempScore(0)
+      dice: @props.game.rollDice()
     @selectDice()
 
     if @props.game.isFarkle()
@@ -98,7 +116,7 @@ DiceView = React.createClass
 
   authDropbox: (e) ->
     e.preventDefault();
-    client.authenticate(updateAuthenticationStatus);
+    dbclient.authenticate(updateAuthenticationStatus);
 
 
   render: () ->
@@ -117,10 +135,11 @@ DiceView = React.createClass
           d.div { className: "btn-group", role:"group"},
             d.button {type:"button", className: "btn btn-default", onClick: @updateDice}, "Roll"
             d.button {type:"button", className: "btn btn-default", onClick: @saveDice}, "Save"
-            # d.button {type:"button", className: "btn btn-default", onClick: @authDropbox}, "Login"
+            if not dbclient.isAuthenticated()
+              d.button {type:"button", className: "btn btn-default", onClick: @authDropbox}, "Login"
 
 
-CommentBox = React.createClass
+Page = React.createClass
   getInitialState: () ->
     player = @getPlayer("Ryan")
     game = @getGame(player)
@@ -139,8 +158,9 @@ CommentBox = React.createClass
   render: () ->
     DiceView({game: @state.game, player: @state.player})
 
-React.render(
-  CommentBox({}),
-  document.getElementById('container')
-  )
+$ ->
+  React.render(
+    Page({}),
+    document.getElementById('container')
+    )
 

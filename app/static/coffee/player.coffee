@@ -3,7 +3,6 @@ class Player
 
   currentRoll = []
   totalScore = []
-  roundScore = 0
   tempScore = 0
   isTurn = false
 
@@ -21,14 +20,6 @@ class Player
   isTurn: () ->
     return isTurn
 
-  setRoundScore: (score) ->
-    roundScore = score
-  addRoundScore: (score) ->
-    roundScore += score
-  removeRoundScore: (score) ->
-    roundScore -= score
-  getRoundScore: () ->
-    return roundScore
 
   setTempScore: (score) ->
     tempScore = score
@@ -38,7 +29,6 @@ class Player
     return tempScore
 
   saveRound: () ->
-    @setRoundScore(roundScore)
     @setTempScore(0)
     @setTurn(false)
 

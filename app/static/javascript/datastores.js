@@ -12,10 +12,17 @@
     console.log("ran");
     if (!client.isAuthenticated()) {
       console.log("not logged in");
+    } else {
+      console.log("logged in!");
+      client.getDatastoreManager().openDefaultDatastore(function(error, datastore) {
+        if (error) {
+          alert("Error opening default datastore: " + error);
+        }
+        window.gameTable = datastore.getTable("gametable");
+        console.log("setting datastore");
+        return window.datastore = datastore;
+      });
     }
-    ({
-      "else": console.log("logged in!")
-    });
     return client.getAccountInfo(function(err, info) {
       if (err) {
         console.log("there was an erreor", err);
@@ -24,11 +31,14 @@
     });
   };
 
+  window.dbclient = client;
+
+  this.updateAuthenticationStatus = updateAuthenticationStatus;
+
   $(function() {
-    client.authenticate({
+    return client.authenticate({
       interactive: false
     }, updateAuthenticationStatus);
-    return window.dbclient = client;
   });
 
 }).call(this);

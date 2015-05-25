@@ -3,7 +3,7 @@
   var Player;
 
   Player = (function() {
-    var currentRoll, isTurn, roundScore, tempScore, totalScore;
+    var currentRoll, isTurn, tempScore, totalScore;
 
     function Player(name) {
       this.name = name;
@@ -12,8 +12,6 @@
     currentRoll = [];
 
     totalScore = [];
-
-    roundScore = 0;
 
     tempScore = 0;
 
@@ -40,22 +38,6 @@
       return isTurn;
     };
 
-    Player.prototype.setRoundScore = function(score) {
-      return roundScore = score;
-    };
-
-    Player.prototype.addRoundScore = function(score) {
-      return roundScore += score;
-    };
-
-    Player.prototype.removeRoundScore = function(score) {
-      return roundScore -= score;
-    };
-
-    Player.prototype.getRoundScore = function() {
-      return roundScore;
-    };
-
     Player.prototype.setTempScore = function(score) {
       return tempScore = score;
     };
@@ -69,7 +51,6 @@
     };
 
     Player.prototype.saveRound = function() {
-      this.setRoundScore(roundScore);
       this.setTempScore(0);
       return this.setTurn(false);
     };
